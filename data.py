@@ -25,7 +25,7 @@ class Player:
     @classmethod
     def find(cls, name):
         for player in cls.all:
-            if player.name == name:
+            if player.name.lower() == name.lower():
                 return player
 
     def __repr__(self):
@@ -160,8 +160,8 @@ print(f"Games rejected: {Game.amount_rejected}/{Game.amount_rejected + len(games
 print("")
 
 
-BLUE_JUNGLER = "UmTi"
-RED_JUNGLER = "Peanut"
+BLUE_JUNGLER = "CarioK"
+RED_JUNGLER = "Follow"
 
 blue_jungler = Player.find(BLUE_JUNGLER)
 red_jungler = Player.find(RED_JUNGLER)
