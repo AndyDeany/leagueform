@@ -16,7 +16,7 @@ def standard_deviation(data_set):
     return stdev(data_set)
 
 
-def show_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games, objective_name):
+def get_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games):
     a_blue = _create_data_set(blue_team_wins, blue_team_games)
     b_red = _create_data_set(red_team_wins, red_team_games)
 
@@ -26,10 +26,4 @@ def show_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_g
     p_red_win = norm(combined_mean, combined_stdev**2).cdf(0)
     p_blue_win = 1 - p_red_win
 
-    print(f"Blue team {objective_name}s: {blue_team_wins}/{blue_team_games}. ", end="")
-    print(f"Red team {objective_name}s: {red_team_wins}/{red_team_games}.")
-
-    print(f"P(Blue {objective_name}) = {round(p_blue_win, 3)} (implied odds: {round(1/p_blue_win, 2)}). ", end="")
-    print(f"P(Red {objective_name}) = {round(p_red_win, 3)} (implied odds: {round(1/p_red_win, 2)}).")
-
-    print("")
+    return p_blue_win, p_red_win

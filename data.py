@@ -1,6 +1,43 @@
 import csv
+import webbrowser
 
-from calc import show_implied_odds
+from calc import get_implied_odds
+
+
+class Team:
+    def __init__(self, name, jungler):
+        self.name = name
+        self.jungler = jungler
+
+
+# LEC
+Team.ASTRALIS = Team("Astralis", "Zanzarah")
+Team.EXCEL = Team("Excel", "Dan")
+Team.SCHALKE = Team("Schalke 04", "Gilius")
+Team.FNATIC = Team("Fnatic", "Selfmade")
+Team.G2 = Team("G2", "Jankos")
+Team.MAD_LIONS = Team("MAD Lions", "Elyoya")
+Team.MISFITS = Team("Misfits Gaming", "Razork")
+Team.ROGUE = Team("Rogue", "Inspired")
+Team.SK = Team("SK", "TynX")
+Team.VITALITY = Team("Team Vitality", "Skeanz")
+
+# LCS
+Team.EG = Team("Evil Geniuses", "Svenskeren")
+Team.GG = Team("Golden Guardians", "Iconic")
+Team.TL = Team("Team Liquid", "Santorin")
+Team.TSM = Team("TSM", "Spica")
+Team.FLYQUEST = Team("FlyQuest", "Josedeodo")
+
+# LCK
+Team.GEN_G = Team("GenG", "Clid")
+Team.HLE = Team("Hanwha Life Esports", "Arthur")
+Team.BRION = Team("Fredit BRION", "UmTi")
+Team.DWG = Team("Damwon (DWG KIA)", "Canyon")
+Team.DRX = Team("DRX", "Pyosik")
+Team.KT = Team("KT Rolster", "Blank")
+Team.T1 = Team("T1", "Ellim")
+Team.LSB = Team("Liiv Sandbox", "Croco")
 
 
 class Player:
@@ -74,14 +111,14 @@ class Game:
             raise InvalidGameError("Couldn't find all required data, gameid=" + game_dict["gameid"])
 
 
-with open("games2020.csv") as input_csv:
+with open("games.csv") as input_csv:
     games_csv = csv.reader(input_csv)
 
     lines = []
     lines = list(games_csv)
     first_line = lines.pop(0)
 
-with open("games.csv") as input_csv:
+with open("games2020.csv") as input_csv:
     games_csv = csv.reader(input_csv)
     lines.extend(list(games_csv)[1:])
 
@@ -160,12 +197,96 @@ print(f"Games rejected: {Game.amount_rejected}/{Game.amount_rejected + len(games
 print("")
 
 
-BLUE_JUNGLER = "CarioK"
-RED_JUNGLER = "Follow"
 
-blue_jungler = Player.find(BLUE_JUNGLER)
-red_jungler = Player.find(RED_JUNGLER)
+def print_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games, objective_name):
+    p_blue_win, p_red_win = get_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games)
 
-show_implied_odds(blue_jungler.blue_dragons, blue_jungler.blue_games, red_jungler.red_dragons, red_jungler.red_games, "dragon")
-show_implied_odds(blue_jungler.blue_heralds, blue_jungler.blue_games, red_jungler.red_heralds, red_jungler.red_games, "herald")
-show_implied_odds(blue_jungler.blue_towers, blue_jungler.blue_games, red_jungler.red_towers, red_jungler.red_games, "tower")
+    print(f"Blue team {objective_name}s: {blue_team_wins}/{blue_team_games}. ", end="")
+    print(f"Red team {objective_name}s: {red_team_wins}/{red_team_games}.")
+
+    print(f"P(Blue {objective_name}) = {round(p_blue_win, 3)} (implied odds: {round(1 / p_blue_win, 2)}). ", end="")
+    print(f"P(Red {objective_name}) = {round(p_red_win, 3)} (implied odds: {round(1 / p_red_win, 2)}).")
+
+
+def generate_market_html(blue_team, red_team, blue_team_wins, blue_team_games, red_team_wins, red_team_games, market):
+    p_blue_win, p_red_win = get_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games)
+
+    html = f"""
+    <div class="market" align="center">
+        <table>
+            <tr>
+                <th>{market.title()}s</th>
+                <th>{blue_team.name}</th>
+                <th>{red_team.name}</th>
+            </tr>
+            <tr>
+                <td>Record</td>
+                <td>{blue_team_wins}/{blue_team_games}</td>
+                <td>{red_team_wins}/{red_team_games}</td>
+            </tr>
+            <tr>
+                <td>Probability</td>
+                <td>{round(p_blue_win, 3)}</td>
+                <td>{round(p_red_win, 3)}</td>
+            </tr>
+            <tr>
+                <td>Implied Odds</td>
+                <td>{round(1 / p_blue_win, 2)}</td>
+                <td>{round(1 / p_red_win, 2)}</td>
+            </tr>
+        </table>
+    </div>
+    """
+    return html
+
+
+def generate_match_html(blue_team, red_team):
+    blue_jungler = Player.find(blue_team.jungler)
+    red_jungler = Player.find(red_team.jungler)
+
+    print_implied_odds(blue_jungler.blue_dragons, blue_jungler.blue_games, red_jungler.red_dragons, red_jungler.red_games, "dragon")
+    print_implied_odds(blue_jungler.blue_heralds, blue_jungler.blue_games, red_jungler.red_heralds, red_jungler.red_games, "herald")
+    print_implied_odds(blue_jungler.blue_towers, blue_jungler.blue_games, red_jungler.red_towers, red_jungler.red_games, "tower")
+
+    html = ""
+    html += f"""<div class="match">\n<h1 style="color:#fff" align="center">{blue_team.name} vs. {red_team.name}</h1>"""
+    html += generate_market_html(blue_team, red_team, blue_jungler.blue_dragons, blue_jungler.blue_games, red_jungler.red_dragons, red_jungler.red_games, "dragon")
+    html += generate_market_html(blue_team, red_team, blue_jungler.blue_heralds, blue_jungler.blue_games, red_jungler.red_heralds, red_jungler.red_games, "herald")
+    html += generate_market_html(blue_team, red_team, blue_jungler.blue_towers, blue_jungler.blue_games, red_jungler.red_towers, red_jungler.red_games, "tower")
+    html += "</div>"
+    return html
+
+
+def generate_html_file(file_name, matches):
+    html = """
+    <html>
+        <head>
+            <link rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="less/style.less">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        </head>
+        <body align="center">
+        <div id="container" align="center">
+    """
+    for match in MATCHES:
+        html += generate_match_html(match[0], match[1])
+    html += "</div>\n</body>\n</html>"
+
+    with open(file_name, "w") as file:
+        file.write(html)
+
+
+HTML_FILE = "stats.html"
+
+MATCHES = [
+    # (Blue Team, Red Team),
+    (Team.DRX, Team.KT),
+    (Team.KT, Team.DRX),
+    (Team.T1, Team.LSB),
+    (Team.LSB, Team.T1),
+]
+
+generate_html_file(HTML_FILE, MATCHES)
+webbrowser.open_new_tab(HTML_FILE)
+
