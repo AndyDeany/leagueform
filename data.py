@@ -20,21 +20,28 @@ Team.SK = Team("SK", "TynX")
 Team.VITALITY = Team("Team Vitality", "Skeanz")
 
 # LCS
+Team._100T = Team("100 Thieves", "Closer")
+Team.C9 = Team("Cloud9", "Blaber")
+Team.CLG = Team("CLG", "Broxah")
+Team.DIGNITAS = Team("Dignitas", "Dardoch")
 Team.EG = Team("Evil Geniuses", "Svenskeren")
+Team.FLYQUEST = Team("FlyQuest", "Josedeodo")
 Team.GG = Team("Golden Guardians", "Iconic")
+Team.IMMORTALS = Team("Immortals", "Xerxe")
 Team.TL = Team("Team Liquid", "Santorin")
 Team.TSM = Team("TSM", "Spica")
-Team.FLYQUEST = Team("FlyQuest", "Josedeodo")
 
 # LCK
+Team.AF = Team("Afreeca Freecs", "Dread")
+Team.DRX = Team("DRX", "Pyosik")
+Team.DWG = Team("Damwon (DWG KIA)", "Canyon")
+Team.BRION = Team("Fredit BRION", "UmTi")
 Team.GEN_G = Team("GenG", "Clid")
 Team.HLE = Team("Hanwha Life Esports", "Arthur")
-Team.BRION = Team("Fredit BRION", "UmTi")
-Team.DWG = Team("Damwon (DWG KIA)", "Canyon")
-Team.DRX = Team("DRX", "Pyosik")
 Team.KT = Team("KT Rolster", "Blank")
-Team.T1 = Team("T1", "Ellim")
 Team.LSB = Team("Liiv Sandbox", "Croco")
+Team.NS = Team("NS Redforce", "Peanut")
+Team.T1 = Team("T1", "Ellim")
 
 
 class Player:

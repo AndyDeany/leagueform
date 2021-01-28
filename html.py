@@ -2,9 +2,8 @@ from calc import get_implied_odds
 from data import Player
 
 
-def _print_implied_odds(blue_team, red_team, blue_team_wins, blue_team_games, red_team_wins, red_team_games, objective_name):
+def _print_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games, objective_name):
     p_blue_win, p_red_win = get_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games)
-    print(f"{blue_team.name} vs. {red_team.name}")
     print(f"Blue team {objective_name}s: {blue_team_wins}/{blue_team_games}. ", end="")
     print(f"Red team {objective_name}s: {red_team_wins}/{red_team_games}.")
     print(f"P(Blue {objective_name}) = {round(p_blue_win, 3)} (implied odds: {round(1 / p_blue_win, 2)}). ", end="")
@@ -47,9 +46,11 @@ def _generate_match_html(blue_team, red_team):
     blue_jungler = Player.find(blue_team.jungler)
     red_jungler = Player.find(red_team.jungler)
 
-    _print_implied_odds(blue_team, red_team, blue_jungler.blue_dragons, blue_jungler.blue_games, red_jungler.red_dragons, red_jungler.red_games, "dragon")
-    _print_implied_odds(blue_team, red_team, blue_jungler.blue_heralds, blue_jungler.blue_games, red_jungler.red_heralds, red_jungler.red_games, "herald")
-    _print_implied_odds(blue_team, red_team, blue_jungler.blue_towers, blue_jungler.blue_games, red_jungler.red_towers, red_jungler.red_games, "tower")
+    print(f"{blue_team.name} vs. {red_team.name}")
+    _print_implied_odds(blue_jungler.blue_dragons, blue_jungler.blue_games, red_jungler.red_dragons, red_jungler.red_games, "dragon")
+    _print_implied_odds(blue_jungler.blue_heralds, blue_jungler.blue_games, red_jungler.red_heralds, red_jungler.red_games, "herald")
+    _print_implied_odds(blue_jungler.blue_towers, blue_jungler.blue_games, red_jungler.red_towers, red_jungler.red_games, "tower")
+    print("")
 
     html = ""
     html += f"""<div class="match">\n<h1 style="color:#fff" align="center">{blue_team.name} vs. {red_team.name}</h1>"""
