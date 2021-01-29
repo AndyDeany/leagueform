@@ -40,6 +40,25 @@ Team.LSB = Team("Liiv Sandbox", "Croco")
 Team.NS = Team("NS Redforce", "Peanut")
 Team.T1 = Team("T1", "Ellim")
 
+# LPL
+Team.BILIBILI = Team("Bilibili Gaming", "Meteor")
+Team.EDG = Team("EDward Gaming", "jiejie")
+Team.ESTAR = Team("eStar", "H4cker")
+Team.FPX = Team("FunPlus Phoenix", "Bo")
+Team.INVICTUS = Team("Invictus Gaming", "XUN")
+Team.JDG = Team("JD Gaming", "Kanavi")
+Team.LGD = Team("LGD Gaming", "Kui")
+Team.LNG = Team("LNG Esports", "Tarzan")
+Team.OMG = Team("Oh My God", "Aki")
+Team.RARE_ATOM = Team("Rare Atom", "Leylan")
+Team.ROGUE_WARRIORS = Team("Rogue Warriors", "Haro")
+Team.RNG = Team("RNG", "Wei")
+Team.SUNING = Team("Suning", "SofM")
+Team.WE = Team("Team WE", "beishang")
+Team.TOP = Team("Top Esports", "Karsa")
+Team.TT = Team("TT Gaming", "bless")
+Team.V5 = Team("Victory Five", "Weiwei")
+
 
 HTML_FILE = "stats.html"
 
@@ -56,6 +75,10 @@ MATCHES = [
     (Team.VITALITY, Team.FNATIC),
     (Team._100T, Team.C9),
     (Team.C9, Team._100T),
+    (Team.ESTAR, Team.LNG),
+    (Team.LNG, Team.ESTAR),
+    (Team.WE, Team.RNG),
+    (Team.RNG, Team.WE),
 ]
 
 generate_html_file(HTML_FILE, MATCHES)
