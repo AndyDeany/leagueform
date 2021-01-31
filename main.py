@@ -66,6 +66,10 @@ MATCHES = [
     # (Blue Team, Red Team),
     (Team.TL, Team.C9),
     (Team.C9, Team.TL),
+    (Team.SUNING, Team.LGD),
+    (Team.LGD, Team.SUNING),
+    (Team.BILIBILI, Team.RNG),
+    (Team.RNG, Team.BILIBILI),
 ]
 
 generate_html_file(HTML_FILE, MATCHES)
