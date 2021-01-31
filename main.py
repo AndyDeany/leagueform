@@ -1,6 +1,6 @@
 import webbrowser
 
-from html import generate_html_file
+from htmlgen import generate_html_file
 from data import Team
 
 
