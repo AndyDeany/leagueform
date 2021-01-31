@@ -1,5 +1,7 @@
 import csv
 
+from oracles import ensure_csv_updated
+
 
 class Team:
     def __init__(self, name, jungler):
@@ -78,7 +80,9 @@ class Game:
             raise InvalidGameError("Couldn't find all required data, gameid=" + game_dict["gameid"])
 
 
-with open("games.csv") as input_csv:
+latest_csv = ensure_csv_updated()
+
+with open(latest_csv) as input_csv:
     games_csv = csv.reader(input_csv)
 
     lines = []
@@ -159,6 +163,7 @@ for game in games:
         games_missing_first_tower += 1
 
 
+print("")
 print(f"{games_missing_first_dragon=}, {games_missing_first_herald=}, {games_missing_first_tower=}")
 print(f"Games rejected: {Game.amount_rejected}/{Game.amount_rejected + len(games)}")
 print("")
