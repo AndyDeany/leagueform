@@ -50,7 +50,7 @@ Team.JDG = Team("JD Gaming", "Kanavi")
 Team.LGD = Team("LGD Gaming", "Kui")
 Team.LNG = Team("LNG Esports", "Tarzan")
 Team.OMG = Team("Oh My God", "Aki")
-Team.RARE_ATOM = Team("Rare Atom", "Leylan")
+Team.RARE_ATOM = Team("Rare Atom", "Leyan")
 Team.ROGUE_WARRIORS = Team("Rogue Warriors", "Haro")
 Team.RNG = Team("RNG", "Wei")
 Team.SUNING = Team("Suning", "SofM")
@@ -64,21 +64,16 @@ HTML_FILE = "stats.html"
 
 MATCHES = [
     # (Blue Team, Red Team),
-    (Team.NS, Team.AF),
-    (Team.AF, Team.NS),
-    (Team.DWG, Team.HLE),
-    (Team.HLE, Team.DWG),
-    (Team.MAD_LIONS, Team.EXCEL),
-    (Team.SCHALKE, Team.SK),
-    (Team.G2, Team.ASTRALIS),
-    (Team.MISFITS, Team.ROGUE),
-    (Team.VITALITY, Team.FNATIC),
-    (Team._100T, Team.C9),
-    (Team.C9, Team._100T),
-    (Team.ESTAR, Team.LNG),
-    (Team.LNG, Team.ESTAR),
-    (Team.WE, Team.RNG),
-    (Team.RNG, Team.WE),
+    (Team.EG, Team.TL),
+    (Team.TL, Team.EG),
+    (Team.AF, Team.T1),
+    (Team.T1, Team.AF),
+    (Team.RARE_ATOM, Team.ROGUE_WARRIORS),
+    (Team.ROGUE_WARRIORS, Team.RARE_ATOM),
+    (Team.NS, Team.KT),
+    (Team.KT, Team.NS),
+    (Team.TOP, Team.JDG),
+    (Team.JDG, Team.TOP),
 ]
 
 generate_html_file(HTML_FILE, MATCHES)
