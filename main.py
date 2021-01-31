@@ -64,16 +64,8 @@ HTML_FILE = "stats.html"
 
 MATCHES = [
     # (Blue Team, Red Team),
-    (Team.EG, Team.TL),
-    (Team.TL, Team.EG),
-    (Team.AF, Team.T1),
-    (Team.T1, Team.AF),
-    (Team.RARE_ATOM, Team.ROGUE_WARRIORS),
-    (Team.ROGUE_WARRIORS, Team.RARE_ATOM),
-    (Team.NS, Team.KT),
-    (Team.KT, Team.NS),
-    (Team.TOP, Team.JDG),
-    (Team.JDG, Team.TOP),
+    (Team.TL, Team.C9),
+    (Team.C9, Team.TL),
 ]
 
 generate_html_file(HTML_FILE, MATCHES)
