@@ -1,7 +1,7 @@
 import webbrowser
 
 from htmlgen import generate_html_file
-from data import Team
+from team import Team
 
 
 # LEC
