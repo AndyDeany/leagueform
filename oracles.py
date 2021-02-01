@@ -31,7 +31,7 @@ def _download_csv(date):
     return csv_name
 
 
-def ensure_csv_updated():
+def update_and_get_latest_csv():
     today = datetime.now().date()
     yesterday = datetime.now().date() - timedelta(days=1)
     todays_csv = f"games2021_{today}.csv"

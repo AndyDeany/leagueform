@@ -1,6 +1,7 @@
 import webbrowser
 
 from htmlgen import generate_html_file
+from data import process_data
 from team import Team
 
 
@@ -72,5 +73,6 @@ MATCHES = [
     (Team.RNG, Team.BILIBILI),
 ]
 
+process_data()
 generate_html_file(HTML_FILE, MATCHES)
 webbrowser.open_new_tab(HTML_FILE)
