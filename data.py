@@ -55,10 +55,6 @@ def _get_game_objects(line_dicts):
 
 
 def _add_games_data_to_players(games):
-    games_missing_first_dragon = 0
-    games_missing_first_herald = 0
-    games_missing_first_tower = 0
-
     for game in games:
         blue_player = Player.find(game.blue_jungler)
         if blue_player is None:
@@ -76,25 +72,28 @@ def _add_games_data_to_players(games):
         elif game.first_dragon == game.SIDE_RED:
             red_player.red_dragons_dates.append(game.date)
         else:
-            games_missing_first_dragon += 1
+            raise ValueError(f"Invalid side for first dragon: {game.first_dragon}.")
 
         if game.first_herald == game.SIDE_BLUE:
             blue_player.blue_heralds_dates.append(game.date)
         elif game.first_herald == game.SIDE_RED:
             red_player.red_heralds_dates.append(game.date)
         else:
-            games_missing_first_herald += 1
+            raise ValueError(f"Invalid side for first herald: {game.first_herald}.")
 
         if game.first_tower == game.SIDE_BLUE:
             blue_player.blue_towers_dates.append(game.date)
         elif game.first_tower == game.SIDE_RED:
             red_player.red_towers_dates.append(game.date)
         else:
-            games_missing_first_tower += 1
+            raise ValueError(f"Invalid side for first tower: {game.first_tower}.")
 
     print("")
-    print(f"{games_missing_first_dragon=}, {games_missing_first_herald=}, {games_missing_first_tower=}")
     print(f"Games rejected: {Game.amount_rejected}/{Game.amount_rejected + len(games)}")
+    print(f"{Game.amount_missing_junglers=}")
+    print(f"{Game.amount_missing_first_dragon=}")
+    print(f"{Game.amount_missing_first_herald=}")
+    print(f"{Game.amount_missing_first_tower=}")
     print("")
 
 

@@ -4,6 +4,10 @@ from datetime import datetime
 class Game:
 
     amount_rejected = 0
+    amount_missing_junglers = 0
+    amount_missing_first_dragon = 0
+    amount_missing_first_herald = 0
+    amount_missing_first_tower = 0
 
     SIDE_BLUE = "Blue"
     SIDE_RED = "Red"
@@ -38,6 +42,16 @@ class Game:
 
         if None in (self.blue_jungler, self.red_jungler, self.first_dragon, self.first_herald, self.first_tower):
             type(self).amount_rejected += 1
+
+            if None in (self.blue_jungler, self.red_jungler):
+                type(self).amount_missing_junglers += 1
+            if self.first_dragon is None:
+                type(self).amount_missing_first_dragon += 1
+            if self.first_herald is None:
+                type(self).amount_missing_first_herald += 1
+            if self.first_tower is None:
+                type(self).amount_missing_first_tower += 1
+
             raise InvalidGameError("Couldn't find all required data, gameid=" + game_dict["gameid"])
 
 
