@@ -30,7 +30,7 @@ def _generate_market_html(blue_team, red_team, market):
     <div class="market" align="center">
         <table>
             <tr>
-                <th>{market.title()}s</th>
+                <th>{market.replace("_", " ").title()}s</th>
                 <th>{blue_team.name}</th>
                 <th>{red_team.name}</th>
             </tr>
@@ -62,6 +62,7 @@ def _generate_match_html(blue_team, red_team):
     html += _generate_market_html(blue_team, red_team, "dragon")
     html += _generate_market_html(blue_team, red_team, "herald")
     html += _generate_market_html(blue_team, red_team, "tower")
+    html += _generate_market_html(blue_team, red_team, "first_blood")
     html += "</div>"
     return html
 

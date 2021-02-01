@@ -88,12 +88,20 @@ def _add_games_data_to_players(games):
         else:
             raise ValueError(f"Invalid side for first tower: {game.first_tower}.")
 
+        if game.first_blood == game.SIDE_BLUE:
+            blue_player.blue_first_bloods_dates.append(game.date)
+        elif game.first_blood == game.SIDE_RED:
+            red_player.red_first_bloods_dates.append(game.date)
+        else:
+            raise ValueError(f"Invalid side for first blood: {game.first_blood}.")
+
     print("")
     print(f"Games rejected: {Game.amount_rejected}/{Game.amount_rejected + len(games)}")
     print(f"{Game.amount_missing_junglers=}")
     print(f"{Game.amount_missing_first_dragon=}")
     print(f"{Game.amount_missing_first_herald=}")
     print(f"{Game.amount_missing_first_tower=}")
+    print(f"{Game.amount_missing_first_blood=}")
     print("")
 
 

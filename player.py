@@ -9,11 +9,13 @@ class Player:
         self.blue_dragons_dates = []
         self.blue_heralds_dates = []
         self.blue_towers_dates = []
+        self.blue_first_bloods_dates = []
 
         self.red_games_dates = []
         self.red_dragons_dates = []
         self.red_heralds_dates = []
         self.red_towers_dates = []
+        self.red_first_bloods_dates = []
 
         self.all.append(self)
 
@@ -43,6 +45,10 @@ class Player:
         return len(self.blue_towers_dates)
 
     @property
+    def blue_first_bloods(self):
+        return len(self.blue_first_bloods_dates)
+
+    @property
     def red_games(self):
         return len(self.red_games_dates)
 
@@ -57,6 +63,10 @@ class Player:
     @property
     def red_towers(self):
         return len(self.red_towers_dates)
+
+    @property
+    def red_first_bloods(self):
+        return len(self.red_first_bloods_dates)
 
     def items_since(self, item, date):
         item_dates = getattr(self, f"{item}_dates")
@@ -74,6 +84,9 @@ class Player:
     def blue_towers_since(self, date):
         return self.items_since("blue_towers", date)
 
+    def blue_first_bloods_since(self, date):
+        return self.items_since("blue_first_bloods", date)
+
     def red_games_since(self, date):
         return self.items_since("red_games", date)
 
@@ -85,3 +98,6 @@ class Player:
 
     def red_towers_since(self, date):
         return self.items_since("red_towers", date)
+
+    def red_first_bloods_since(self, date):
+        return self.items_since("red_first_bloods", date)

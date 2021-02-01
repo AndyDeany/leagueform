@@ -8,6 +8,7 @@ class Game:
     amount_missing_first_dragon = 0
     amount_missing_first_herald = 0
     amount_missing_first_tower = 0
+    amount_missing_first_blood = 0
 
     SIDE_BLUE = "Blue"
     SIDE_RED = "Red"
@@ -21,6 +22,7 @@ class Game:
         self.first_dragon = None
         self.first_herald = None
         self.first_tower = None
+        self.first_blood = None
 
         for game_dict in game_dicts:
             if game_dict["position"] == self.ROLE_JUNGLE:
@@ -38,9 +40,12 @@ class Game:
             if game_dict["firsttower"] == "1":
                 self.first_tower = game_dict["side"]
 
+            if game_dict["firstblood"] == "1":
+                self.first_blood = game_dict["side"]
+
         self.date = datetime.strptime(game_dict["date"], "%Y-%m-%d %H:%M:%S")
 
-        if None in (self.blue_jungler, self.red_jungler, self.first_dragon, self.first_herald, self.first_tower):
+        if None in (self.blue_jungler, self.red_jungler, self.first_dragon, self.first_herald, self.first_tower, self.first_blood):
             type(self).amount_rejected += 1
 
             if None in (self.blue_jungler, self.red_jungler):
@@ -51,6 +56,8 @@ class Game:
                 type(self).amount_missing_first_herald += 1
             if self.first_tower is None:
                 type(self).amount_missing_first_tower += 1
+            if self.first_blood is None:
+                type(self).amount_missing_first_blood += 1
 
             raise InvalidGameError("Couldn't find all required data, gameid=" + game_dict["gameid"])
 
