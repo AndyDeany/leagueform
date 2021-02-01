@@ -1,17 +1,30 @@
+from datetime import datetime
+
 from calc import get_implied_odds
 from data import Player
 
 
-def _print_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games, objective_name):
-    p_blue_win, p_red_win = get_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games)
-    print(f"Blue team {objective_name}s: {blue_team_wins}/{blue_team_games}. ", end="")
-    print(f"Red team {objective_name}s: {red_team_wins}/{red_team_games}.")
-    print(f"P(Blue {objective_name}) = {round(p_blue_win, 3)} (implied odds: {round(1 / p_blue_win, 2)}). ", end="")
-    print(f"P(Red {objective_name}) = {round(p_red_win, 3)} (implied odds: {round(1 / p_red_win, 2)}).")
+def _generate_market_html(blue_team, red_team, market):
+    blue_jungler = Player.find(blue_team.jungler)
+    red_jungler = Player.find(red_team.jungler)
 
+    blue_team_wins = getattr(blue_jungler, f"blue_{market}s")
+    red_team_wins = getattr(red_jungler, f"red_{market}s")
+    blue_team_games = blue_jungler.blue_games
+    red_team_games = red_jungler.red_games
 
-def _generate_market_html(blue_team, red_team, blue_team_wins, blue_team_games, red_team_wins, red_team_games, market):
+    date = datetime(2021, 1, 1, 0, 0, 0)
+    blue_team_2021_wins = blue_jungler.items_since(f"blue_{market}s", date)
+    red_team_2021_wins = red_jungler.items_since(f"red_{market}s", date)
+    blue_team_2021_games = blue_jungler.blue_games_since(date)
+    red_team_2021_games = red_jungler.red_games_since(date)
+
     p_blue_win, p_red_win = get_implied_odds(blue_team_wins, blue_team_games, red_team_wins, red_team_games)
+
+    # print(f"Blue team {market}s: {blue_team_wins}/{blue_team_games}. ", end="")
+    # print(f"Red team {market}s: {red_team_wins}/{red_team_games}.")
+    # print(f"P(Blue {market}) = {round(p_blue_win, 3)} (implied odds: {round(1 / p_blue_win, 2)}). ", end="")
+    # print(f"P(Red {market}) = {round(p_red_win, 3)} (implied odds: {round(1 / p_red_win, 2)}).")
 
     html = f"""
     <div class="market" align="center">
@@ -22,9 +35,9 @@ def _generate_market_html(blue_team, red_team, blue_team_wins, blue_team_games, 
                 <th>{red_team.name}</th>
             </tr>
             <tr>
-                <td>Record</td>
-                <td>{blue_team_wins}/{blue_team_games}</td>
-                <td>{red_team_wins}/{red_team_games}</td>
+                <td>Record (2021)</td>
+                <td>{blue_team_wins}/{blue_team_games} ({blue_team_2021_wins}/{blue_team_2021_games})</td>
+                <td>{red_team_wins}/{red_team_games} ({red_team_2021_wins}/{red_team_2021_games})</td>
             </tr>
             <tr>
                 <td>Probability</td>
@@ -43,20 +56,12 @@ def _generate_market_html(blue_team, red_team, blue_team_wins, blue_team_games, 
 
 
 def _generate_match_html(blue_team, red_team):
-    blue_jungler = Player.find(blue_team.jungler)
-    red_jungler = Player.find(red_team.jungler)
-
-    print(f"{blue_team.name} vs. {red_team.name}")
-    _print_implied_odds(blue_jungler.blue_dragons, blue_jungler.blue_games, red_jungler.red_dragons, red_jungler.red_games, "dragon")
-    _print_implied_odds(blue_jungler.blue_heralds, blue_jungler.blue_games, red_jungler.red_heralds, red_jungler.red_games, "herald")
-    _print_implied_odds(blue_jungler.blue_towers, blue_jungler.blue_games, red_jungler.red_towers, red_jungler.red_games, "tower")
-    print("")
-
+    # print(f"\n{blue_team.name} vs. {red_team.name}")
     html = ""
     html += f"""<div class="match">\n<h1 style="color:#fff" align="center">{blue_team.name} vs. {red_team.name}</h1>"""
-    html += _generate_market_html(blue_team, red_team, blue_jungler.blue_dragons, blue_jungler.blue_games, red_jungler.red_dragons, red_jungler.red_games, "dragon")
-    html += _generate_market_html(blue_team, red_team, blue_jungler.blue_heralds, blue_jungler.blue_games, red_jungler.red_heralds, red_jungler.red_games, "herald")
-    html += _generate_market_html(blue_team, red_team, blue_jungler.blue_towers, blue_jungler.blue_games, red_jungler.red_towers, red_jungler.red_games, "tower")
+    html += _generate_market_html(blue_team, red_team, "dragon")
+    html += _generate_market_html(blue_team, red_team, "herald")
+    html += _generate_market_html(blue_team, red_team, "tower")
     html += "</div>"
     return html
 
