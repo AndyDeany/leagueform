@@ -65,12 +65,14 @@ HTML_FILE = "stats.html"
 
 MATCHES = [
     # (Blue Team, Red Team),
-    (Team.TL, Team.C9),
-    (Team.C9, Team.TL),
-    (Team.SUNING, Team.LGD),
-    (Team.LGD, Team.SUNING),
-    (Team.BILIBILI, Team.RNG),
-    (Team.RNG, Team.BILIBILI),
+    (Team.T1, Team.NS),
+    (Team.NS, Team.T1),
+    (Team.GEN_G, Team.DRX),
+    (Team.DRX, Team.GEN_G),
+    (Team.ESTAR, Team.TT),
+    (Team.TT, Team.ESTAR),
+    (Team.JDG, Team.ROGUE_WARRIORS),
+    (Team.ROGUE_WARRIORS, Team.JDG),
 ]
 
 process_data()
