@@ -58,7 +58,7 @@ def _generate_market_html(blue_team, red_team, market):
 def _generate_match_html(blue_team, red_team):
     # print(f"\n{blue_team.name} vs. {red_team.name}")
     html = ""
-    html += f"""<div class="match">\n<h1 style="color:#fff" align="center">{blue_team.name} vs. {red_team.name}</h1>"""
+    html += f"""<div class="match">\n<h1 style="color:#fff" align="center"><span style="color:#1cb3ff">{blue_team.name}</span> vs. <span style="color:#de4040">{red_team.name}</span></h1>"""
     html += _generate_market_html(blue_team, red_team, "dragon")
     html += _generate_market_html(blue_team, red_team, "herald")
     html += _generate_market_html(blue_team, red_team, "tower")
