@@ -20,7 +20,7 @@ Team.VITALITY = Team("Team Vitality", "Skeanz")
 # LCS
 Team._100T = Team("100 Thieves", "Closer")
 Team.C9 = Team("Cloud9", "Blaber")
-Team.CLG = Team("CLG", "Broxah")
+Team.CLG = Team("CLG", "Wiggily")
 Team.DIGNITAS = Team("Dignitas", "Dardoch")
 Team.EG = Team("Evil Geniuses", "Svenskeren")
 Team.FLYQUEST = Team("FlyQuest", "Josedeodo")
@@ -57,7 +57,7 @@ Team.RNG = Team("RNG", "Wei")
 Team.SUNING = Team("Suning", "SofM")
 Team.WE = Team("Team WE", "beishang")
 Team.TOP = Team("Top Esports", "Karsa")
-Team.TT = Team("TT Gaming", "bless")
+Team.TT = Team("TT Gaming", "Xiaopeng")
 Team.V5 = Team("Victory Five", "Weiwei")
 
 
@@ -65,14 +65,26 @@ HTML_FILE = "stats.html"
 
 MATCHES = [
     # (Blue Team, Red Team),
-    (Team.T1, Team.NS),
-    (Team.NS, Team.T1),
-    (Team.GEN_G, Team.DRX),
-    (Team.DRX, Team.GEN_G),
-    (Team.ESTAR, Team.TT),
-    (Team.TT, Team.ESTAR),
-    (Team.JDG, Team.ROGUE_WARRIORS),
-    (Team.ROGUE_WARRIORS, Team.JDG),
+    (Team.MISFITS, Team.SCHALKE),
+    (Team.EXCEL, Team.SK),
+    (Team.MAD_LIONS, Team.VITALITY),
+    (Team.ROGUE, Team.ASTRALIS),
+    (Team.FNATIC, Team.G2),
+    (Team.FLYQUEST, Team. EG),
+    (Team.DIGNITAS, Team.TL),
+    (Team._100T, Team.CLG),
+    (Team.C9, Team.TSM),
+    (Team.IMMORTALS, Team.GG),
+    (Team.LNG, Team.RARE_ATOM),
+    (Team.RARE_ATOM, Team.LNG),
+    (Team.V5, Team.ESTAR),
+    (Team.ESTAR, Team.V5),
+    (Team.INVICTUS, Team.RNG),
+    (Team.RNG, Team.INVICTUS),
+    (Team.HLE, Team.LSB),
+    (Team.LSB, Team.HLE),
+    (Team.DWG, Team.DRX),
+    (Team.DRX, Team.DWG),
 ]
 
 process_data()
