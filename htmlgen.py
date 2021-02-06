@@ -68,13 +68,13 @@ def _generate_match_html(blue_team, red_team):
 
 
 def generate_html_file(file_name, matches):
-    html = """
-    <html>
+    html = """<html>
         <head>
             <link rel="stylesheet" href="css/style.css">
             <link rel="stylesheet" href="less/style.less">
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+            <link rel="shortcut icon" type="image/png" href="images/favicon.png">
         </head>
         <body align="center">
         <div id="container" align="center">
