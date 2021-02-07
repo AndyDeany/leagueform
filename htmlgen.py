@@ -1,7 +1,9 @@
 from datetime import datetime
 
 from calc import get_implied_odds
-from data import Player
+from player import Player
+from team import Team
+from scraper import Match
 
 
 def _generate_market_html(blue_team, red_team, market):
@@ -80,6 +82,8 @@ def generate_html_file(file_name, matches):
         <div id="container" align="center">
     """
     for match in matches:
+        if isinstance(match, Match):
+            match = (Team.find(match.team1_fullname), Team.find(match.team2_fullname))
         html += _generate_match_html(match[0], match[1])
     html += "</div>\n</body>\n</html>"
 

@@ -3,6 +3,7 @@ import webbrowser
 from htmlgen import generate_html_file
 from data import process_data
 from team import Team
+from scraper import get_upcoming_matches
 
 
 # LEC
@@ -20,7 +21,7 @@ Team.VITALITY = Team("Team Vitality", "Skeanz")
 # LCS
 Team._100T = Team("100 Thieves", "Closer")
 Team.C9 = Team("Cloud9", "Blaber")
-Team.CLG = Team("CLG", "Wiggily")
+Team.CLG = Team("Counter Logic Gaming", "Wiggily")
 Team.DIGNITAS = Team("Dignitas", "Dardoch")
 Team.EG = Team("Evil Geniuses", "Svenskeren")
 Team.FLYQUEST = Team("FlyQuest", "Josedeodo")
@@ -60,33 +61,25 @@ Team.TOP = Team("Top Esports", "Karsa")
 Team.TT = Team("TT Gaming", "Xiaopeng")
 Team.V5 = Team("Victory Five", "Weiwei")
 
+# LLA
+Team.AK = Team("All Knights", "Grell")
+Team.ESTRAL = Team("Estral Esports", "Mightybear")
+Team.FURIOUS = Team("Furious", "Bugi")
+Team.INFINITY = Team("Infinity eSports", "SolidSnake")
+Team.ISURUS = Team("Isurus", "Tierwulf")
+Team.KLG = Team("Kaos Latin Gamers", "QQMore")
+Team.R7 = Team("Rainbow 7", "Xypherz")
+Team.XTEN = Team("XTEN", "Unforgiven")
+
 
 HTML_FILE = "stats.html"
 
-MATCHES = [
+matches = [
     # (Blue Team, Red Team),
-    (Team.MISFITS, Team.SCHALKE),
-    (Team.EXCEL, Team.SK),
-    (Team.MAD_LIONS, Team.VITALITY),
-    (Team.ROGUE, Team.ASTRALIS),
-    (Team.FNATIC, Team.G2),
-    (Team.FLYQUEST, Team. EG),
-    (Team.DIGNITAS, Team.TL),
-    (Team._100T, Team.CLG),
-    (Team.C9, Team.TSM),
-    (Team.IMMORTALS, Team.GG),
-    (Team.LNG, Team.RARE_ATOM),
-    (Team.RARE_ATOM, Team.LNG),
-    (Team.V5, Team.ESTAR),
-    (Team.ESTAR, Team.V5),
-    (Team.INVICTUS, Team.RNG),
-    (Team.RNG, Team.INVICTUS),
-    (Team.HLE, Team.LSB),
-    (Team.LSB, Team.HLE),
-    (Team.DWG, Team.DRX),
-    (Team.DRX, Team.DWG),
 ]
 
+matches.extend(get_upcoming_matches("LCS", "LEC"))
+
 process_data()
-generate_html_file(HTML_FILE, MATCHES)
+generate_html_file(HTML_FILE, matches)
 webbrowser.open_new_tab(HTML_FILE)
