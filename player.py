@@ -20,10 +20,12 @@ class Player:
         self.all.append(self)
 
     @classmethod
-    def find(cls, name):
+    def find(cls, name, *, error=False):
         for player in cls.all:
             if player.name.lower() == name.lower():
                 return player
+        if error:
+            raise ValueError(f"Couldn't find player '{name}'.")
 
     def __repr__(self):
         return f"{self.name}: Blue dragons {self.blue_dragons}/{self.blue_games}, Red dragons {self.red_dragons}/{self.red_games}, Blue heralds {self.blue_heralds}/{self.blue_games}, Red heralds {self.red_heralds}/{self.red_games}, Blue towers {self.blue_towers}/{self.blue_games}, Red towers {self.red_towers}/{self.red_games}."

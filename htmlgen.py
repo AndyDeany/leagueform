@@ -5,8 +5,8 @@ from data import Player
 
 
 def _generate_market_html(blue_team, red_team, market):
-    blue_jungler = Player.find(blue_team.jungler)
-    red_jungler = Player.find(red_team.jungler)
+    blue_jungler = Player.find(blue_team.jungler, error=True)
+    red_jungler = Player.find(red_team.jungler, error=True)
 
     blue_team_wins = getattr(blue_jungler, f"blue_{market}s")
     red_team_wins = getattr(red_jungler, f"red_{market}s")
