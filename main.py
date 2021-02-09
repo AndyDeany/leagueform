@@ -4,6 +4,7 @@ from htmlgen import generate_html_file
 from data import process_data
 from team import Team
 from scraper import get_upcoming_matches
+from aws import upload_file
 
 
 # LEC
@@ -76,10 +77,12 @@ HTML_FILE = "stats.html"
 
 matches = [
     # (Blue Team, Red Team),
+    (Team.FURIOUS, Team.INFINITY),
 ]
 
-matches.extend(get_upcoming_matches("LCS", "LEC"))
+matches.extend(get_upcoming_matches("LCS", "LEC", hours=144))
 
 process_data()
 generate_html_file(HTML_FILE, matches)
+upload_file(HTML_FILE)
 webbrowser.open_new_tab(HTML_FILE)
