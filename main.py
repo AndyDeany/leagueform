@@ -12,11 +12,11 @@ Team.ASTRALIS = Team("Astralis", "Zanzarah")
 Team.EXCEL = Team("Excel", "Dan")
 Team.SCHALKE = Team("Schalke 04", "Gilius")
 Team.FNATIC = Team("Fnatic", "Selfmade")
-Team.G2 = Team("G2", "Jankos")
+Team.G2 = Team("G2 Esports", "Jankos")
 Team.MAD_LIONS = Team("MAD Lions", "Elyoya")
 Team.MISFITS = Team("Misfits Gaming", "Razork")
 Team.ROGUE = Team("Rogue", "Inspired")
-Team.SK = Team("SK", "TynX")
+Team.SK = Team("SK Gaming", "TynX")
 Team.VITALITY = Team("Team Vitality", "Skeanz")
 
 # LCS
