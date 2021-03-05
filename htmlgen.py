@@ -57,15 +57,30 @@ def _generate_market_html(blue_team, red_team, market):
     return html
 
 
-def _generate_match_html(blue_team, red_team):
-    # print(f"\n{blue_team.name} vs. {red_team.name}")
+def _generate_game_html(blue_team, red_team, start_time):
     html = ""
-    html += f"""<div class="match">\n<h1 style="color:#fff" align="center"><span style="color:#1cb3ff">{blue_team.name}</span> vs. <span style="color:#de4040">{red_team.name}</span></h1>"""
+    html += f"""<div class="match">\n<h1 style="color:#fff" align="center">{start_time}<span style="color:#1cb3ff">{blue_team.name}</span> vs. <span style="color:#de4040">{red_team.name}</span></h1>"""
     html += _generate_market_html(blue_team, red_team, "dragon")
     html += _generate_market_html(blue_team, red_team, "herald")
     html += _generate_market_html(blue_team, red_team, "tower")
     html += _generate_market_html(blue_team, red_team, "first_blood")
     html += "</div>"
+    return html
+
+
+def _generate_match_html(match):
+    # print(f"\n{blue_team.name} vs. {red_team.name}")
+    if isinstance(match, Match):
+        blue_team = Team.find(match.team1_fullname)
+        red_team = Team.find(match.team2_fullname)
+        start_time = match.start_time.strftime("%H%M: ")
+    else:
+        blue_team, red_team = match
+        start_time = ""
+    html = ""
+    html += _generate_game_html(blue_team, red_team, start_time)
+    if not isinstance(match, Match):
+        html += _generate_game_html(red_team, blue_team, start_time)
     return html
 
 
@@ -82,9 +97,7 @@ def generate_html_file(file_name, matches):
         <div id="container" align="center">
     """
     for match in matches:
-        if isinstance(match, Match):
-            match = (Team.find(match.team1_fullname), Team.find(match.team2_fullname))
-        html += _generate_match_html(match[0], match[1])
+        html += _generate_match_html(match)
     html += "</div>\n</body>\n</html>"
 
     with open(file_name, "w") as file:
