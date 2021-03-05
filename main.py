@@ -22,7 +22,7 @@ Team.VITALITY = Team("Team Vitality", "Skeanz")
 # LCS
 Team._100T = Team("100 Thieves", "Closer")
 Team.C9 = Team("Cloud9", "Blaber")
-Team.CLG = Team("Counter Logic Gaming", "Wiggily")
+Team.CLG = Team("Counter Logic Gaming", "Broxah")
 Team.DIGNITAS = Team("Dignitas", "Dardoch")
 Team.EG = Team("Evil Geniuses", "Svenskeren")
 Team.FLYQUEST = Team("FlyQuest", "Josedeodo")
@@ -35,30 +35,30 @@ Team.TSM = Team("TSM", "Spica")
 Team.AF = Team("Afreeca Freecs", "Dread")
 Team.DRX = Team("DRX", "Pyosik")
 Team.DWG = Team("Damwon (DWG KIA)", "Canyon")
-Team.BRION = Team("Fredit BRION", "UmTi")
-Team.GEN_G = Team("GenG", "Clid")
+Team.BRO = Team("Fredit BRION", "UmTi")
+Team.GEN = Team("GenG", "Clid")
 Team.HLE = Team("Hanwha Life Esports", "Arthur")
-Team.KT = Team("KT Rolster", "Blank")
-Team.LSB = Team("Liiv Sandbox", "Croco")
+Team.KT = Team("KT Rolster", "GIDEON")
+Team.LSB = Team("Liiv Sandbox", "OnFleek")
 Team.NS = Team("NS Redforce", "Peanut")
-Team.T1 = Team("T1", "Ellim")
+Team.T1 = Team("T1", "Oner")
 
 # LPL
-Team.BILIBILI = Team("Bilibili Gaming", "Meteor")
+Team.BLG = Team("Bilibili Gaming", "Meteor")
 Team.EDG = Team("EDward Gaming", "jiejie")
-Team.ESTAR = Team("eStar", "H4cker")
-Team.FPX = Team("FunPlus Phoenix", "Bo")
+Team.ES = Team("eStar", "H4cker")
+Team.FPX = Team("FunPlus Phoenix", "Tian")
 Team.INVICTUS = Team("Invictus Gaming", "XUN")
-Team.JDG = Team("JD Gaming", "Kanavi")
+Team.JDG = Team("JD Gaming (pedo)", "Kanavi")
 Team.LGD = Team("LGD Gaming", "Kui")
 Team.LNG = Team("LNG Esports", "Tarzan")
 Team.OMG = Team("Oh My God", "Aki")
-Team.RARE_ATOM = Team("Rare Atom", "Leyan")
-Team.ROGUE_WARRIORS = Team("Rogue Warriors", "Haro")
+Team.RA = Team("Rare Atom", "Leyan")
+Team.RW = Team("Rogue Warriors", "Haro")
 Team.RNG = Team("RNG", "Wei")
-Team.SUNING = Team("Suning", "SofM")
+Team.SN = Team("Suning (pedo)", "SofM")
 Team.WE = Team("Team WE", "beishang")
-Team.TOP = Team("Top Esports", "Karsa")
+Team.TES = Team("Top Esports", "Karsa")
 Team.TT = Team("TT Gaming", "Xiaopeng")
 Team.V5 = Team("Victory Five", "Weiwei")
 
@@ -72,15 +72,33 @@ Team.KLG = Team("Kaos Latin Gamers", "QQMore")
 Team.R7 = Team("Rainbow 7", "Xypherz")
 Team.XTEN = Team("XTEN", "Unforgiven")
 
+# TCL
+Team.AURORA = Team("Team AURORA", "Kamil")
+Team.SUPERM = Team("SuperMassive", "kireas")
+Team.NASR = Team("NASR Turkey", "Kituruken")
+Team.ISTANBUL = Team("Istanbul Wildcats", "Ferret")
+Team.GALATASARAY = Team("Galatasaray Esports", "Mojito")
+Team.GALAKTICOS = Team("Galakticos", "Tumay")
+Team.DP = Team("Dark Passage", "Typhoon")
+Team.BESIKTAS = Team("Besiktas Esports", "Robin")
+Team.FIVER = Team("5 Ronin", "Skewer")
+Team.FENER = Team("1907 Fenerbache", "Elramir")
+
 
 HTML_FILE = "stats.html"
 
 matches = [
     # (Blue Team, Red Team),
-    (Team.FURIOUS, Team.INFINITY),
+    (Team.HLE, Team.NS),
+    (Team.GEN, Team.LSB),
+    (Team.ES, Team.JDG),
+    (Team.V5, Team.SN),
 ]
 
-matches.extend(get_upcoming_matches("LCS", "LEC", hours=144))
+matches.extend(get_upcoming_matches("LCS", "LEC", hours=36))
+
+matches.extend([
+])
 
 process_data()
 generate_html_file(HTML_FILE, matches)
